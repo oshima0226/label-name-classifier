@@ -16,5 +16,13 @@
     "limdu": "^0.9.4",
     "lodash": "^4.17.11",
     "node": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.119",
+    "@types/node": "^10.12.12",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.1"
   }
 }
