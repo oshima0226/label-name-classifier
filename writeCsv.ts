@@ -13,12 +13,12 @@ export function parseCsv(path: string): {}[] {
   return parse(data, { columns: true });
 }
 
-export async function writeCSV(headers: string[], data: {}[]): Promise<void> {
-  const path = './words_label_map.csv';
+export async function writeCsv(headers: string[], data: {}[], path: string): Promise<void> {
   const body = data.map(row => headers.map(header => _.get(row, header)));
 
-  const output = csv.stringify([headers, ...body]);
+  const output = await util.promisify(csv.stringify)([headers, ...body]);
 
   await util.promisify(fs.writeFile)(path, output);
-  console.log(`generated words-label map csv -> ${path}`);
+
+  console.log(`csv generated -> ${path}`);
 }

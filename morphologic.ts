@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 const fs = require('fs');
 const csv = require('csv');
 const path  = require('path');
-const { writeCSV, parseCsv } = require('./writeCsv');
+const { writeCsv, parseCsv } = require('./writeCsv');
 
 const { tokenize, getTokenizer } = require('kuromojin');
 
@@ -32,8 +32,9 @@ async function generateTokenizedCsv() {
       return { label: row.label, words: words.join(',') };
     })
   );
+  const path = './words_label_map.csv';
 
-  await writeCSV(['words', 'label'], wordsNameMap);
+  await writeCsv(['words', 'label'], wordsNameMap, path);
 }
 
 generateTokenizedCsv();
