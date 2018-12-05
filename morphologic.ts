@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
+import { writeCsv, parseCsv, writeJson } from './writeCsv';
 
 const fs = require('fs');
 const csv = require('csv');
 const path  = require('path');
-const { writeCsv, parseCsv } = require('./writeCsv');
 
 const { tokenize, getTokenizer } = require('kuromojin');
 
@@ -14,7 +14,7 @@ const { tokenize, getTokenizer } = require('kuromojin');
 // });
 
 async function generateTokenizedCsv() {
-  const csvPath = './label_name_map.csv';
+  const csvPath = './label_name_map_min.csv';
   const labelNameMap: {label: string, name: string}[] = parseCsv(csvPath);
 
   const tokenizer = await getTokenizer();
@@ -29,13 +29,22 @@ async function generateTokenizedCsv() {
         .sortedUniq()
         .value();
 
-      return { label: row.label, words: words.join(',') };
+      const input = _.chain(words)
+        .split(',')
+        .keyBy(item => item)
+        .mapValues(item => 1)
+        .value();
+
+      return { input, output: row.label }
     })
   );
-  const path = './words_label_map.csv';
+  const path = './words_label_map.json';
 
-  await writeCsv(['words', 'label'], wordsNameMap, path);
+  await writeJson(path, wordsNameMap);
+  // await writeCsv(['words', 'label'], wordsNameMap, path);
 }
+
+
 
 generateTokenizedCsv();
 
