@@ -9,12 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/natural": "^0.2.33",
     "csv": "^5.0.0",
     "csv-parse": "^4.0.1",
     "kuromoji": "^0.1.2",
     "kuromojin": "^1.4.0",
     "limdu": "^0.9.4",
     "lodash": "^4.17.11",
+    "natural": "^0.6.2",
     "node": "^11.2.0"
   },
   "devDependencies": {
