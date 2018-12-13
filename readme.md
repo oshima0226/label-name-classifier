@@ -14,7 +14,7 @@ npm run build
 ...
 ```
 
-### 分類するデータを`item_name.csv`に配置
+### 分類するデータを`itemNames.csv`に配置
 ```csv:itemName.csv
 "name"
 "コーヒー飲料"
