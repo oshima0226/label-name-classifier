@@ -7,7 +7,7 @@ async function classify() {
   const classifierPath = './classifier.json';
   const stemmer = new natural.StemmerJa;
 
-  const target = parseCsv('./targetNames.csv');
+  const target = parseCsv('./itemNames.csv');
   const targetNames: string[] = _.map(target, 'name');
 
   const classifier = natural.BayesClassifier;

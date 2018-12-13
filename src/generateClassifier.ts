@@ -5,7 +5,7 @@ import normalize from './normalization';
 const natural = require('natural');
 
 function generateClassifierJson() {
-  const csvPath = 'label_name_map.csv';
+  const csvPath = 'trainData.csv';
   const trainData = <{ label: string, name: string }[]> parseCsv(csvPath);
 
   const stemmer = new natural.StemmerJa;
