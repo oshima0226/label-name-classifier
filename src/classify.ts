@@ -10,16 +10,15 @@ async function classify() {
   const target = parseCsv('./targetNames.csv');
   const targetNames: string[] = _.map(target, 'name');
 
-  console.log(targetNames);
-
-  // const classifier = natural.BayesClassifier;
-  // or
   const classifier = natural.BayesClassifier;
 
   classifier.load(classifierPath, stemmer, function(err, classifier) {
+    console.log('-----------------------------');
     targetNames.forEach(name => {
       const result = classifier.classify(name);
-      console.log(result);
+      console.log(`name:  ${name}`);
+      console.log(`label: ${result}`);
+      console.log('-----------------------------');
     });
   });
 }

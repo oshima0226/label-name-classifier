@@ -1,4 +1,6 @@
 import parseCsv from './CsvParser';
+import { BayesClassifier, Tokenizer } from 'natural';
+import normalize from './normalization';
 
 const natural = require('natural');
 
@@ -7,10 +9,14 @@ function generateClassifierJson() {
   const trainData = <{ label: string, name: string }[]> parseCsv(csvPath);
 
   const stemmer = new natural.StemmerJa;
-  const classifier = new natural.BayesClassifier(stemmer);
+  const classifier = <BayesClassifier> new natural.BayesClassifier(stemmer);
 
+  const tokenizer = <Tokenizer> new natural.TokenizerJa;
   trainData.forEach(map => {
-    classifier.addDocument(map.name, map.label);
+    const token: string[] = normalize(tokenizer.tokenize(map.name));
+    if (token.length > 0) {
+      classifier.addDocument((token), map.label);
+    }
   });
   classifier.train();
 
